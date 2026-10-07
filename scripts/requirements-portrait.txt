@@ -1,0 +1,3 @@
+# Only needed locally when the profile photo changes.
+pillow>=10.4.0
+numpy>=1.26
