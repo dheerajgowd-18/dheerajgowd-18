@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
 """Prepare a photo for ASCII rendering.
 
+Crops tightly to subject, suppresses background noise,
+applies CLAHE equalization, and normalizes contrast for clean ASCII conversion.
+
 Example:
-    python scripts/prep_photo.py source-photo.jpg --aspect 1.59
+    python scripts/prep_photo.py source-photo.jpeg
 """
 
 from __future__ import annotations
@@ -19,7 +22,7 @@ MAX_SIDE = 1400
 BINS = 256
 
 
-def clahe(gray: np.ndarray, tiles: tuple[int, int] = (8, 8), clip: float = 2.6) -> np.ndarray:
+def clahe(gray: np.ndarray, tiles: tuple[int, int] = (8, 8), clip: float = 2.0) -> np.ndarray:
     h, w = gray.shape
     ty, tx = tiles
     pad_y, pad_x = (-h) % ty, (-w) % tx
@@ -31,7 +34,7 @@ def clahe(gray: np.ndarray, tiles: tuple[int, int] = (8, 8), clip: float = 2.6) 
 
     for i in range(ty):
         for j in range(tx):
-            tile = g[i * th:(i + 1) * th, j * tw:(j + 1) * tw]
+            tile = g[i * th : (i + 1) * th, j * tw : (j + 1) * tw]
             hist = np.bincount(tile.ravel(), minlength=BINS).astype(np.float32)
             excess = np.maximum(hist - limit, 0).sum()
             hist = np.minimum(hist, limit) + excess / BINS
@@ -72,34 +75,46 @@ def crop_to_aspect(img: Image.Image, aspect: float, bias: float) -> Image.Image:
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("photo", type=Path)
-    parser.add_argument("--aspect", type=float, default=1.59)
-    parser.add_argument("--bias", type=float, default=0.25)
-    parser.add_argument("--clip", type=float, default=2.2)
-    parser.add_argument("--gamma", type=float, default=1.9)
+    parser.add_argument("photo", type=Path, nargs="?", default=ROOT / "source-photo.jpeg")
+    parser.add_argument("--aspect", type=float, default=1.02)
+    parser.add_argument("--bias", type=float, default=0.10)
+    parser.add_argument("--clip", type=float, default=2.0)
+    parser.add_argument("--gamma", type=float, default=1.2)
+    parser.add_argument("--bg-thresh", type=float, default=24.0)
     args = parser.parse_args()
 
-    if not args.photo.exists():
-        raise SystemExit(f"photo not found: {args.photo}")
+    photo_path = args.photo
+    if not photo_path.exists():
+        fallback = ROOT / "source-photo.jpg"
+        if fallback.exists():
+            photo_path = fallback
+        else:
+            raise SystemExit(f"photo not found: {args.photo}")
 
-    image = ImageOps.exif_transpose(Image.open(args.photo).convert("RGB"))
+    image = ImageOps.exif_transpose(Image.open(photo_path).convert("RGB"))
     image = crop_to_aspect(image, args.aspect, args.bias)
     if max(image.size) > MAX_SIDE:
         image.thumbnail((MAX_SIDE, MAX_SIDE), Image.LANCZOS)
 
-    gray = np.asarray(image.convert("L"), dtype=np.uint8)
-    gray = clahe(gray, (8, 8), args.clip)
+    raw_gray = np.asarray(image.convert("L"), dtype=np.uint8)
 
-    low, high = np.percentile(gray, [1.5, 93.0])
-    if high - low < 1:
-        low, high = 0.0, 255.0
+    bg_mask = raw_gray <= args.bg_thresh
+    enhanced = clahe(raw_gray, (8, 8), args.clip)
 
-    stretched = np.clip((gray.astype(np.float32) - low) / (high - low), 0, 1)
-    stretched = stretched ** (1.0 / args.gamma)
-    final = (stretched * 255).astype(np.uint8)
+    subject_pixels = enhanced[~bg_mask]
+    if len(subject_pixels) > 0:
+        low, high = np.percentile(subject_pixels, [3.0, 96.0])
+        if high - low < 1:
+            low, high = 0.0, 255.0
+        stretched = np.clip((enhanced.astype(np.float32) - low) / (high - low), 0, 1)
+        stretched = (stretched ** (1.0 / args.gamma)) * 255.0
+    else:
+        stretched = enhanced.astype(np.float32)
 
-    Image.fromarray(final, mode="L").save(OUT)
-    print(f"wrote {OUT.relative_to(ROOT)}")
+    final = np.where(bg_mask, 0, stretched).astype(np.uint8)
+
+    Image.fromarray(final).save(OUT)
+    print(f"wrote {OUT.relative_to(ROOT)} ({final.shape[1]}x{final.shape[0]})")
 
 
 if __name__ == "__main__":

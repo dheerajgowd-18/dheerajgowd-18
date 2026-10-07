@@ -10,8 +10,8 @@
 
 <table>
   <tr>
-    <td valign="top"><img src="./dheeraj-ascii.svg" width="370" alt="Animated ASCII portrait" /></td>
-    <td valign="top"><img src="./info-card.svg" width="490" alt="AI engineer profile card" /></td>
+    <td valign="top"><img src="./dheeraj-ascii.svg" width="390" alt="Animated ASCII portrait" /></td>
+    <td valign="top"><img src="./info-card.svg" width="470" alt="AI engineer profile card" /></td>
   </tr>
 </table>
 
@@ -23,24 +23,24 @@
 
 ## Dheeraj Gowd
 
-**B.Tech CSE · AI / GenAI Engineer in progress**  
-Building practical LLM applications, RAG systems, and agentic workflows with Python.
+**B.Tech CSE · AI / GenAI Engineer**  
+Building practical LLM applications, agentic workflows, and RAG systems with Python.
 
 ### What I build
 
-- **Enterprise Agentic RAG** — a production-oriented RAG pipeline with guardrails, retrieval, routing, and evaluation.
-- **Verified Research Agent** — a domain-agnostic LangChain + LangGraph research workflow designed for traceable, defensible answers.
-- **NEXORA 2026** — a leakage-safe predictive-maintenance pipeline that turns large-scale telemetry into weekly high-yield dispatch predictions.
+- **Enterprise Agentic RAG** — a production-oriented RAG pipeline with guardrails, adaptive retrieval, query routing, and automated evaluation.
+- **Verified Research Agent** — an evidence-grounded research workflow built with LangGraph, claim-level verification, checkpointed execution, and human-in-the-loop review.
+- **Vireo Audio Support Intelligence** — an intelligent audio support system delivering multi-turn diagnostic reasoning and automated ticket synthesis.
 
 ### Current focus
 
-`Python` · `FastAPI` · `LangChain` · `LangGraph` · `RAG` · `Embeddings` · `Vector Search` · `LLM Applications`
+`Python` · `FastAPI` · `LangChain` · `LangGraph` · `Agentic AI` · `RAG` · `Embeddings` · `Vector Search` · `Qdrant`
 
 ### Selected projects
 
-- [Enterprise Agentic RAG](https://github.com/dheerajgowd-18/agentic-rag)
-- [NEXORA 2026](https://github.com/dheerajgowd-18/lpdg-nexora-2026)
-- [Vireo Audio Support Intelligence](https://github.com/dheerajgowd-18/vireo-audio)
+- [Enterprise Agentic RAG](https://github.com/dheerajgowd-18/agentic-rag) — guardrailed retrieval, dynamic routing, and evaluation
+- [Verified Research Agent](https://github.com/dheerajgowd-18/research-agent) — multi-agent claim verification with LangGraph checkpoints
+- [Vireo Audio Support Intelligence](https://github.com/dheerajgowd-18/vireo-audio) — automated customer diagnosis and voice intelligence
 
 ---
 
@@ -76,8 +76,8 @@ python scripts/render_heatmap_svg.py
 # profile card
 python scripts/make_info_card.py
 
-# portrait: add your own source-photo.jpg first
-python scripts/prep_photo.py source-photo.jpg --aspect 1.59
+# portrait: uses source-photo.jpeg (or pass your own photo)
+python scripts/prep_photo.py source-photo.jpeg
 python scripts/make_ascii_svg.py
 ```
 

@@ -26,49 +26,50 @@ HOST = "github"
 ROWS: list[tuple[str | None, str]] = [
     ("Name", "Dheeraj Gowd"),
     ("Role", "AI / GenAI Engineer"),
-    ("Focus", "LLM apps · RAG · Agentic AI"),
+    ("Focus", "Agentic AI · RAG Systems · LLMs"),
     ("--", ""),
-    ("Now", "Enterprise Agentic RAG"),
+    ("Projects", "Enterprise Agentic RAG"),
     ("", "Verified Research Agent"),
-    ("", "NEXORA 2026"),
+    ("", "Vireo Audio Support Intelligence"),
     ("--", ""),
     ("Stack", "Python · FastAPI · LangChain"),
-    ("", "LangGraph · Embeddings · Vector Search"),
-    ("", "Qdrant · ChromaDB · GitHub Actions"),
+    ("", "LangGraph · Vector Search · Qdrant"),
+    ("", "ChromaDB · Evaluators · Git"),
     ("--", ""),
-    ("Build", "Retrieval pipelines · tool calling"),
-    ("", "evaluation · guardrails · automation"),
-    ("--", ""),
-    ("Links", "github.com/dheerajgowd-18"),
-    ("", "agentic-rag · lpdg-nexora-2026"),
+    ("Core", "Autonomous Agents · Tool Calling"),
+    ("", "Retrieval Pipelines · Guardrails"),
 ]
 
 SWATCHES = ["#161b22", "#0e4429", "#006d32", "#26a641", "#39d353", "#69f0a0", "#58a6ff", "#c9d1d9"]
-WIDTH = 560
-PAD = 22
+WIDTH = 470
+HEIGHT = 420
+PAD = 24
 TITLEBAR_H = 34
-LINE_H = 17
-KEY_W = 86
+LINE_H = 20
+KEY_W = 82
 
 
 def build() -> str:
     parts: list[str] = []
     add = parts.append
 
-    y = TITLEBAR_H + 30
-    prompt_y = y
-    y += LINE_H + 8
+    prompt_y = 62
+    y = prompt_y + 30
     heights: list[int] = []
     for key, _ in ROWS:
-        heights.append(y)
-        y += 9 if key == "--" else LINE_H
+        if key == "--":
+            y += 4
+            heights.append(y)
+            y += 14
+        else:
+            heights.append(y)
+            y += LINE_H
 
     swatch_y = y + 10
-    height = swatch_y + 14 + PAD
 
     add(
-        f'<svg xmlns="http://www.w3.org/2000/svg" width="{WIDTH}" height="{height}" '
-        f'viewBox="0 0 {WIDTH} {height}" role="img" aria-label="AI engineer profile card">'
+        f'<svg xmlns="http://www.w3.org/2000/svg" width="{WIDTH}" height="{HEIGHT}" '
+        f'viewBox="0 0 {WIDTH} {HEIGHT}" role="img" aria-label="AI engineer profile card">'
     )
 
     if STATIC:
@@ -82,7 +83,7 @@ def build() -> str:
     add(f"<style>.mono{{font-family:{MONO};}}{anim}</style>")
 
     add(
-        f'<rect x="0.5" y="0.5" width="{WIDTH - 1}" height="{height - 1}" rx="10" '
+        f'<rect x="0.5" y="0.5" width="{WIDTH - 1}" height="{HEIGHT - 1}" rx="10" '
         f'fill="{BG}" stroke="{BORDER}"/>'
     )
     add(f'<line x1="0" y1="{TITLEBAR_H}" x2="{WIDTH}" y2="{TITLEBAR_H}" stroke="{BORDER}"/>')
@@ -96,7 +97,7 @@ def build() -> str:
         return "" if STATIC else f' style="animation-delay:{0.15 + index * 0.055:.3f}s"'
 
     add(
-        f'<text class="mono row" x="{PAD}" y="{prompt_y}" font-size="13.5"{delay(0)}>'
+        f'<text class="mono row" x="{PAD}" y="{prompt_y}" font-size="14"{delay(0)}>'
         f'<tspan fill="{KEY}" font-weight="600">{escape(USER)}</tspan>'
         f'<tspan fill="{MUTED}">@</tspan>'
         f'<tspan fill="{ACCENT}" font-weight="600">{escape(HOST)}</tspan></text>'
@@ -117,14 +118,14 @@ def build() -> str:
         add(f'<g class="row"{delay(index)}>')
         if key:
             add(
-                f'<text class="mono" x="{PAD}" y="{row_y}" font-size="12" fill="{KEY}" '
+                f'<text class="mono" x="{PAD}" y="{row_y}" font-size="13" fill="{KEY}" '
                 f'font-weight="600">{escape(key)}</text>'
             )
             add(
-                f'<text class="mono" x="{PAD + KEY_W - 15}" y="{row_y}" font-size="12" fill="{MUTED}">:</text>'
+                f'<text class="mono" x="{PAD + KEY_W - 14}" y="{row_y}" font-size="13" fill="{MUTED}">:</text>'
             )
         add(
-            f'<text class="mono" x="{PAD + KEY_W}" y="{row_y}" font-size="12" '
+            f'<text class="mono" x="{PAD + KEY_W}" y="{row_y}" font-size="13" '
             f'fill="{FG if key else MUTED}">{escape(value)}</text>'
         )
         add("</g>")
@@ -132,7 +133,7 @@ def build() -> str:
     n = len(ROWS) + 2
     for index, colour in enumerate(SWATCHES):
         add(
-            f'<rect class="row" x="{PAD + index * 20}" y="{swatch_y}" width="16" height="10" rx="2" '
+            f'<rect class="row" x="{PAD + index * 24}" y="{swatch_y}" width="18" height="11" rx="2" '
             f'fill="{colour}"{delay(n + index * 0.4)}/>'
         )
 
@@ -142,7 +143,7 @@ def build() -> str:
 
 def main() -> None:
     OUT.write_text(build() + "\n", encoding="utf-8")
-    print(f"wrote {OUT.relative_to(ROOT)} ({OUT.stat().st_size:,} bytes)")
+    print(f"wrote {OUT.relative_to(ROOT)} ({WIDTH}x{HEIGHT})")
 
 
 if __name__ == "__main__":
