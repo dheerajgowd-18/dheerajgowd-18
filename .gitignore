@@ -8,11 +8,6 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-# Local portrait source files
-source-photo.jpg
-source-photo.jpeg
-source-photo.png
-source-prepped.png
 
 # OS/editor files
 .DS_Store

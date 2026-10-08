@@ -1,65 +1,78 @@
-<div align="center">
+# DHEERAJ GOWD
 
-<h3><code>dheeraj@github ~ $ ./contributions.sh</code></h3>
+**AI / GENAI ENGINEER**
 
-<img src="./contrib-heatmap.svg" width="860" alt="Animated contribution heatmap for the last year" />
+B.Tech CSE student building practical LLM applications, RAG systems, and agentic workflows with Python.
 
-<br><br>
-
-<h3><code>dheeraj@github ~ $ whoami</code></h3>
-
-<table>
-  <tr>
-    <td valign="top"><img src="./dheeraj-ascii.svg" width="390" alt="Animated ASCII portrait" /></td>
-    <td valign="top"><img src="./info-card.svg" width="470" alt="AI engineer profile card" /></td>
-  </tr>
-</table>
+`Python` · `FastAPI` · `LangChain` · `LangGraph` · `RAG` · `Qdrant`
 
 <br>
 
-</div>
+<img src="./ai-signal.svg" width="860" alt="Generative AI Information Flow: Retrieval, Reasoning, Verification, and Action" />
 
 ---
 
-## Dheeraj Gowd
+### CONTRIBUTION TELEMETRY
 
-**B.Tech CSE · AI / GenAI Engineer**  
-Building practical LLM applications, agentic workflows, and RAG systems with Python.
+<img src="./contrib-heatmap.svg" width="860" alt="GitHub Contribution Activity Matrix" />
 
-### What I build
+---
 
-- **Enterprise Agentic RAG** — a production-oriented RAG pipeline with guardrails, adaptive retrieval, query routing, and automated evaluation.
-- **Verified Research Agent** — an evidence-grounded research workflow built with LangGraph, claim-level verification, checkpointed execution, and human-in-the-loop review.
-- **Vireo Audio Support Intelligence** — an intelligent audio support system delivering multi-turn diagnostic reasoning and automated ticket synthesis.
+### SELECTED WORK
 
-### Current focus
+#### 01 · Enterprise Agentic RAG
 
-`Python` · `FastAPI` · `LangChain` · `LangGraph` · `Agentic AI` · `RAG` · `Embeddings` · `Vector Search` · `Qdrant`
+A production-oriented RAG pipeline with retrieval, routing, guardrails, and evaluation.
 
-### Selected projects
+`Retrieval` · `Routing` · `Guardrails` · `Evaluation`
 
-- [Enterprise Agentic RAG](https://github.com/dheerajgowd-18/agentic-rag) — guardrailed retrieval, dynamic routing, and evaluation
-- [Verified Research Agent](https://github.com/dheerajgowd-18/research-agent) — multi-agent claim verification with LangGraph checkpoints
-- [Vireo Audio Support Intelligence](https://github.com/dheerajgowd-18/vireo-audio) — automated customer diagnosis and voice intelligence
+<img src="./project-rag-signal.svg" width="860" alt="Enterprise Agentic RAG System Architecture" />
+
+[View repository →](https://github.com/dheerajgowd-18/agentic-rag)
+
+<br>
+
+#### 02 · Verified Research Agent
+
+A domain-agnostic research workflow using LangChain and LangGraph for evidence gathering, claim verification, and traceable answers.
+
+`Research` · `Evidence` · `Verification` · `LangGraph`
+
+<img src="./project-agent-signal.svg" width="860" alt="Verified Research Agent Execution Graph" />
+
+[View repository →](https://github.com/dheerajgowd-18/research-agent)
+
+---
+
+### CURRENT FOCUS
+
+`Python` · `FastAPI` · `LangChain` · `LangGraph` · `RAG` · `Embeddings` · `Vector Search` · `Qdrant`
+
+---
+
+### CONNECT
+
+[GitHub](https://github.com/dheerajgowd-18) · [Email](mailto:dheerajgowd6@gmail.com)
 
 ---
 
 <details>
-<summary><b>How this profile art works</b></summary>
+<summary><b>Telemetry & Pipeline Architecture</b></summary>
 
 <br>
 
-Everything at the top is generated locally as self-contained SVG assets. The README is only the layout layer; the animations live inside the SVG files.
+All visual telemetry and schematics are generated deterministically as self-contained SVG assets. The README acts strictly as the layout layer.
 
-| File | Generator | Refresh |
+| Asset | Pipeline / Source | Frequency |
 | --- | --- | --- |
-| `contrib-heatmap.svg` | `fetch_contributions.py` → `render_heatmap_svg.py` | daily via GitHub Actions |
-| `dheeraj-ascii.svg` | `prep_photo.py` → `make_ascii_svg.py` | when the photo changes |
-| `info-card.svg` | `make_info_card.py` | when profile details change |
+| `contrib-heatmap.svg` | `scripts/fetch_contributions.py` → `scripts/render_heatmap_svg.py` | Daily via GitHub Actions (06:17 UTC) |
+| `ai-signal.svg` | `scripts/generate_ai_signal.py` | Deterministic local generation |
+| `project-rag-signal.svg` | `scripts/generate_project_visuals.py` | Deterministic local generation |
+| `project-agent-signal.svg` | `scripts/generate_project_visuals.py` | Deterministic local generation |
 
-Contribution data is read from GitHub's public contribution-calendar HTML endpoint. No personal access token is required by this workflow. GitHub documents the contribution calendar as the public visual record of profile contributions. See [GitHub profile contributions](https://docs.github.com/en/account-and-profile/concepts/contributions-on-your-profile).
+Contribution data is read directly from GitHub's public contribution calendar HTML endpoint. No personal access token (PAT) or third-party service is required.
 
-### Local commands
+#### Local commands
 
 ```bash
 python -m venv .venv
@@ -67,20 +80,16 @@ python -m venv .venv
 .venv\Scripts\Activate.ps1
 
 pip install -r scripts/requirements.txt
-pip install -r scripts/requirements-portrait.txt
 
-# contribution graph
+# Refresh contribution telemetry
 python scripts/fetch_contributions.py
 python scripts/render_heatmap_svg.py
 
-# profile card
-python scripts/make_info_card.py
-
-# portrait: uses source-photo.jpeg (or pass your own photo)
-python scripts/prep_photo.py source-photo.jpeg
-python scripts/make_ascii_svg.py
+# Regenerate signature and project visuals
+python scripts/generate_ai_signal.py
+python scripts/generate_project_visuals.py
 ```
 
-Use `STATIC=1` when you want a frozen SVG for local previews.
+Use `STATIC=1` when rendering frozen SVGs without CSS keyframe animations.
 
 </details>
