@@ -6,8 +6,6 @@ B.Tech CSE student building practical LLM applications, RAG systems, and agentic
 
 `Python` · `FastAPI` · `LangChain` · `LangGraph` · `RAG` · `Qdrant`
 
-<br>
-
 <img src="./ai-signal.svg" width="860" alt="Generative AI Information Flow: Retrieval, Reasoning, Verification, and Action" />
 
 ---
@@ -21,26 +19,16 @@ B.Tech CSE student building practical LLM applications, RAG systems, and agentic
 ### SELECTED WORK
 
 #### 01 · Enterprise Agentic RAG
-
-A production-oriented RAG pipeline with retrieval, routing, guardrails, and evaluation.
-
-`Retrieval` · `Routing` · `Guardrails` · `Evaluation`
+A production-oriented RAG pipeline with retrieval, routing, guardrails, and evaluation.  
+`Retrieval` · `Routing` · `Guardrails` · `Evaluation` · [View repository →](https://github.com/dheerajgowd-18/agentic-rag)
 
 <img src="./project-rag-signal.svg" width="860" alt="Enterprise Agentic RAG System Architecture" />
 
-[View repository →](https://github.com/dheerajgowd-18/agentic-rag)
-
-<br>
-
 #### 02 · Verified Research Agent
-
-A domain-agnostic research workflow using LangChain and LangGraph for evidence gathering, claim verification, and traceable answers.
-
-`Research` · `Evidence` · `Verification` · `LangGraph`
+A domain-agnostic research workflow using LangChain and LangGraph for evidence gathering, claim verification, and traceable answers.  
+`Research` · `Evidence` · `Verification` · `LangGraph` · [View repository →](https://github.com/dheerajgowd-18/research-agent)
 
 <img src="./project-agent-signal.svg" width="860" alt="Verified Research Agent Execution Graph" />
-
-[View repository →](https://github.com/dheerajgowd-18/research-agent)
 
 ---
 
@@ -58,8 +46,6 @@ A domain-agnostic research workflow using LangChain and LangGraph for evidence g
 
 <details>
 <summary><b>Telemetry & Pipeline Architecture</b></summary>
-
-<br>
 
 All visual telemetry and schematics are generated deterministically as self-contained SVG assets. The README acts strictly as the layout layer.
 

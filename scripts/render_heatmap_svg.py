@@ -31,9 +31,9 @@ PITCH = CELL + GAP
 RADIUS = 2
 PAD = 24
 LABEL_W = 28
-HEADER_H = 34
+HEADER_H = 28
 WIDTH = 860
-HEIGHT = 196
+HEIGHT = 170
 MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
 
@@ -73,10 +73,10 @@ def layout(days: list[dict], peak: int) -> tuple[list[dict], int]:
 def build(payload: dict) -> str:
     cells, weeks = layout(payload["days"], payload["stats"]["max_count"])
     grid_x = PAD + LABEL_W
-    grid_y = HEADER_H + 26
+    grid_y = HEADER_H + 19
     grid_h = 7 * PITCH - GAP
     grid_w = weeks * PITCH - GAP
-    footer_y = grid_y + grid_h + 20
+    footer_y = grid_y + grid_h + 15
 
     shift = max(0, (WIDTH - (grid_x + grid_w + PAD)) // 2)
     gx = grid_x + shift
@@ -109,16 +109,16 @@ def build(payload: dict) -> str:
 
     # Technical Header
     add(
-        f'<text class="mono fade" x="{PAD}" y="22" font-size="10.5" font-weight="600" '
+        f'<text class="mono fade" x="{PAD}" y="18.5" font-size="10" font-weight="600" '
         f'fill="{FG}" letter-spacing="1.5">CONTRIBUTION TELEMETRY</text>'
     )
-    add(f'<circle class="fade" cx="218" cy="18.5" r="3" fill="{ACCENT}"/>')
+    add(f'<circle class="fade" cx="214" cy="15" r="2.8" fill="{ACCENT}"/>')
     add(
-        f'<text class="mono fade" x="228" y="22" font-size="9" fill="{MUTED}" '
+        f'<text class="mono fade" x="224" y="18.5" font-size="9" fill="{MUTED}" '
         f'letter-spacing="0.8">52-WEEK ACTIVITY MATRIX</text>'
     )
     add(
-        f'<text class="mono fade" x="{WIDTH - PAD}" y="22" font-size="9" fill="{SUBTLE}" '
+        f'<text class="mono fade" x="{WIDTH - PAD}" y="18.5" font-size="9" fill="{SUBTLE}" '
         f'text-anchor="end" letter-spacing="0.8">UTC // DAILY REFRESH</text>'
     )
     add(f'<line x1="0" y1="{HEADER_H}" x2="{WIDTH}" y2="{HEADER_H}" stroke="{BORDER}" stroke-width="1"/>')

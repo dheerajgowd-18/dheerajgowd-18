@@ -13,7 +13,7 @@ ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "ai-signal.svg"
 
 WIDTH = 860
-HEIGHT = 160
+HEIGHT = 128
 BG = "#080A0D"
 BORDER = "#161D27"
 ACCENT = "#65D9FF"
@@ -51,66 +51,65 @@ def build_svg() -> str:
 
     # Card background and fine structural border
     add(
-        f'<rect x="0.5" y="0.5" width="{WIDTH - 1}" height="{HEIGHT - 1}" rx="8" '
+        f'<rect x="0.5" y="0.5" width="{WIDTH - 1}" height="{HEIGHT - 1}" rx="6" '
         f'fill="{BG}" stroke="{BORDER}" stroke-width="1"/>'
     )
 
     # Architectural corner tick markers (+)
-    for cx, cy in [(28, 22), (WIDTH - 28, 22), (28, HEIGHT - 22), (WIDTH - 28, HEIGHT - 22)]:
+    for cx, cy in [(24, 18), (WIDTH - 24, 18), (24, HEIGHT - 18), (WIDTH - 24, HEIGHT - 18)]:
         add(
-            f'<path d="M {cx - 4} {cy} L {cx + 4} {cy} M {cx} {cy - 4} L {cx} {cy + 4}" '
+            f'<path d="M {cx - 3} {cy} L {cx + 3} {cy} M {cx} {cy - 3} L {cx} {cy + 3}" '
             f'stroke="{BORDER}" stroke-width="1"/>'
         )
 
     # Micro-labels (Header metadata)
     add(
-        f'<text class="mono meta-text" x="48" y="26" font-size="9.5" fill="{TEXT_MUTED}" '
+        f'<text class="mono meta-text" x="42" y="21" font-size="9" fill="{TEXT_MUTED}" '
         f'letter-spacing="1">SYS.ID // NEURAL_FLOW.01</text>'
     )
     add(
-        f'<text class="mono meta-text" x="{WIDTH - 48}" y="26" font-size="9.5" fill="{TEXT_MUTED}" '
+        f'<text class="mono meta-text" x="{WIDTH - 42}" y="21" font-size="9" fill="{TEXT_MUTED}" '
         f'text-anchor="end" letter-spacing="1">STATUS: VERIFIED // LATENCY: NOMINAL</text>'
     )
 
     # Subtle horizontal center baseline
     add(
-        f'<line x1="50" y1="80" x2="{WIDTH - 50}" y2="80" '
+        f'<line x1="45" y1="60" x2="{WIDTH - 45}" y2="60" '
         f'stroke="{SUBTLE_LINE}" stroke-width="1" stroke-dasharray="3 6"/>'
     )
 
     # Harmonic secondary wave paths (contextual vector field)
     # Upper branch: reasoning exploration
     add(
-        f'<path class="flow-subtle" d="M 130 80 C 200 45, 270 45, 340 80 C 410 115, 480 115, 550 80 C 620 45, 680 55, 740 80" '
+        f'<path class="flow-subtle" d="M 130 60 C 200 32, 270 32, 340 60 C 410 88, 480 88, 550 60 C 620 32, 680 42, 740 60" '
         f'fill="none" stroke="{SUBTLE_LINE}" stroke-width="1.2"/>'
     )
     # Lower branch: dense retrieval field
     add(
-        f'<path class="flow-subtle" d="M 60 95 C 95 95, 110 85, 130 80" '
+        f'<path class="flow-subtle" d="M 60 74 C 95 74, 110 65, 130 60" '
         f'fill="none" stroke="{MUTED_LINE}" stroke-width="1"/>'
     )
     add(
-        f'<path class="flow-subtle" d="M 60 65 C 95 65, 110 75, 130 80" '
+        f'<path class="flow-subtle" d="M 60 46 C 95 46, 110 55, 130 60" '
         f'fill="none" stroke="{MUTED_LINE}" stroke-width="1"/>'
     )
 
     # Intermediate feedback loop / verification gate arc
     add(
-        f'<path class="flow-subtle" d="M 340 80 C 410 50, 480 50, 550 80 C 480 110, 410 110, 340 80" '
+        f'<path class="flow-subtle" d="M 340 60 C 410 36, 480 36, 550 60 C 480 84, 410 84, 340 60" '
         f'fill="none" stroke="{MUTED_LINE}" stroke-width="1" stroke-dasharray="2 4"/>'
     )
 
     # PRIMARY ACTIVE SIGNAL (Cyan trajectory)
-    # Flowing smoothly from Retrieval (130) -> Reasoning (340) -> Verification (550) -> Action (740) -> Vector output (800)
     add(
         f'<path class="flow-primary" '
-        f'd="M 60 80 L 130 80 C 200 70, 270 90, 340 80 C 410 70, 480 70, 550 80 L 740 80 L 800 80" '
+        f'd="M 60 60 L 130 60 C 200 52, 270 68, 340 60 C 410 52, 480 52, 550 60 L 740 60 L 800 60" '
         f'fill="none" stroke="{ACCENT}" stroke-width="1.6" stroke-linecap="round"/>'
     )
 
     # Action terminal arrow tick at x=800
     add(
-        f'<path class="meta-text" d="M 795 76 L 800 80 L 795 84" '
+        f'<path class="meta-text" d="M 795 56 L 800 60 L 795 64" '
         f'fill="none" stroke="{ACCENT}" stroke-width="1.5" stroke-linecap="round"/>'
     )
 
@@ -125,28 +124,28 @@ def build_svg() -> str:
     for x, num, name, delay in stages:
         # Outer ring
         add(
-            f'<circle class="flow-node" cx="{x}" cy="80" r="7" '
+            f'<circle class="flow-node" cx="{x}" cy="60" r="6" '
             f'fill="none" stroke="{ACCENT}" stroke-width="1" stroke-opacity="0.35" '
             f'style="animation-delay:{delay}s"/>'
         )
         # Inner core
         add(
-            f'<circle class="flow-node" cx="{x}" cy="80" r="3" '
+            f'<circle class="flow-node" cx="{x}" cy="60" r="2.8" '
             f'fill="{ACCENT}" style="animation-delay:{delay}s"/>'
         )
         # Vertical alignment guide tick
         add(
-            f'<line class="flow-subtle" x1="{x}" y1="88" x2="{x}" y2="108" '
+            f'<line class="flow-subtle" x1="{x}" y1="67" x2="{x}" y2="82" '
             f'stroke="{BORDER}" stroke-width="1" stroke-dasharray="2 2"/>'
         )
         # Stage Number
         add(
-            f'<text class="mono meta-text" x="{x}" y="122" font-size="9" fill="{ACCENT}" '
+            f'<text class="mono meta-text" x="{x}" y="94" font-size="8.5" fill="{ACCENT}" '
             f'font-weight="600" text-anchor="middle" letter-spacing="0.5">{num}</text>'
         )
         # Stage Name
         add(
-            f'<text class="mono meta-text" x="{x}" y="136" font-size="9.5" fill="{TEXT_SECONDARY}" '
+            f'<text class="mono meta-text" x="{x}" y="107" font-size="9" fill="{TEXT_SECONDARY}" '
             f'font-weight="500" text-anchor="middle" letter-spacing="1">{name}</text>'
         )
 

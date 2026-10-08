@@ -15,7 +15,7 @@ OUT_RAG = ROOT / "project-rag-signal.svg"
 OUT_AGENT = ROOT / "project-agent-signal.svg"
 
 WIDTH = 860
-HEIGHT = 54
+HEIGHT = 40
 BG = "#080A0D"
 BORDER = "#161D27"
 ACCENT = "#65D9FF"
@@ -49,11 +49,11 @@ def build_rag_svg() -> str:
 
     # Connecting backbone
     add(
-        f'<path class="line-flow" d="M 40 27 L 820 27" fill="none" stroke="{MUTED_LINE}" stroke-width="1"/>'
+        f'<path class="line-flow" d="M 40 20 L 820 20" fill="none" stroke="{MUTED_LINE}" stroke-width="1"/>'
     )
     # Active pipeline segment
     add(
-        f'<path class="line-flow" d="M 50 27 L 780 27" fill="none" stroke="{ACCENT}" stroke-width="1.2" stroke-opacity="0.8"/>'
+        f'<path class="line-flow" d="M 50 20 L 780 20" fill="none" stroke="{ACCENT}" stroke-width="1.2" stroke-opacity="0.8"/>'
     )
 
     steps = [
@@ -65,21 +65,21 @@ def build_rag_svg() -> str:
 
     for x, num, label, delay in steps:
         add(
-            f'<circle class="fade" cx="{x}" cy="27" r="3" fill="{ACCENT}" style="animation-delay:{delay}s"/>'
+            f'<circle class="fade" cx="{x}" cy="20" r="3" fill="{ACCENT}" style="animation-delay:{delay}s"/>'
         )
         add(
-            f'<circle class="fade" cx="{x}" cy="27" r="6" fill="none" stroke="{ACCENT}" stroke-width="0.8" stroke-opacity="0.4" style="animation-delay:{delay}s"/>'
+            f'<circle class="fade" cx="{x}" cy="20" r="6" fill="none" stroke="{ACCENT}" stroke-width="0.8" stroke-opacity="0.4" style="animation-delay:{delay}s"/>'
         )
         add(
-            f'<text class="mono fade" x="{x + 12}" y="31" font-size="9" fill="{TEXT_MUT}" font-weight="600">{num}</text>'
+            f'<text class="mono fade" x="{x + 12}" y="24" font-size="9" fill="{TEXT_MUT}" font-weight="600">{num}</text>'
         )
         add(
-            f'<text class="mono fade" x="{x + 30}" y="31" font-size="9" fill="{TEXT_SEC}" letter-spacing="0.5">{escape(label)}</text>'
+            f'<text class="mono fade" x="{x + 30}" y="24" font-size="9" fill="{TEXT_SEC}" letter-spacing="0.5">{escape(label)}</text>'
         )
 
     # Arrowhead at end
     add(
-        f'<path class="fade" d="M 816 24 L 821 27 L 816 30" fill="none" stroke="{ACCENT}" stroke-width="1.2" stroke-linecap="round"/>'
+        f'<path class="fade" d="M 816 17 L 821 20 L 816 23" fill="none" stroke="{ACCENT}" stroke-width="1.2" stroke-linecap="round"/>'
     )
 
     add("</svg>")
@@ -110,15 +110,15 @@ def build_agent_svg() -> str:
 
     # Connecting backbone
     add(
-        f'<path class="line-flow" d="M 40 27 L 820 27" fill="none" stroke="{MUTED_LINE}" stroke-width="1"/>'
+        f'<path class="line-flow" d="M 40 20 L 820 20" fill="none" stroke="{MUTED_LINE}" stroke-width="1"/>'
     )
     # Verification loop arc between x=330 and x=560
     add(
-        f'<path class="fade" d="M 540 23 C 480 10, 390 10, 340 23" fill="none" stroke="{ACCENT}" stroke-width="1" stroke-dasharray="2 3" stroke-opacity="0.6"/>'
+        f'<path class="fade" d="M 540 17 C 480 6, 390 6, 340 17" fill="none" stroke="{ACCENT}" stroke-width="1" stroke-dasharray="2 3" stroke-opacity="0.6"/>'
     )
     # Active pipeline segment
     add(
-        f'<path class="line-flow" d="M 50 27 L 780 27" fill="none" stroke="{ACCENT}" stroke-width="1.2" stroke-opacity="0.8"/>'
+        f'<path class="line-flow" d="M 50 20 L 780 20" fill="none" stroke="{ACCENT}" stroke-width="1.2" stroke-opacity="0.8"/>'
     )
 
     steps = [
@@ -130,21 +130,21 @@ def build_agent_svg() -> str:
 
     for x, num, label, delay in steps:
         add(
-            f'<circle class="fade" cx="{x}" cy="27" r="3" fill="{ACCENT}" style="animation-delay:{delay}s"/>'
+            f'<circle class="fade" cx="{x}" cy="20" r="3" fill="{ACCENT}" style="animation-delay:{delay}s"/>'
         )
         add(
-            f'<circle class="fade" cx="{x}" cy="27" r="6" fill="none" stroke="{ACCENT}" stroke-width="0.8" stroke-opacity="0.4" style="animation-delay:{delay}s"/>'
+            f'<circle class="fade" cx="{x}" cy="20" r="6" fill="none" stroke="{ACCENT}" stroke-width="0.8" stroke-opacity="0.4" style="animation-delay:{delay}s"/>'
         )
         add(
-            f'<text class="mono fade" x="{x + 12}" y="31" font-size="9" fill="{TEXT_MUT}" font-weight="600">{num}</text>'
+            f'<text class="mono fade" x="{x + 12}" y="24" font-size="9" fill="{TEXT_MUT}" font-weight="600">{num}</text>'
         )
         add(
-            f'<text class="mono fade" x="{x + 30}" y="31" font-size="9" fill="{TEXT_SEC}" letter-spacing="0.5">{escape(label)}</text>'
+            f'<text class="mono fade" x="{x + 30}" y="24" font-size="9" fill="{TEXT_SEC}" letter-spacing="0.5">{escape(label)}</text>'
         )
 
     # Arrowhead at end
     add(
-        f'<path class="fade" d="M 816 24 L 821 27 L 816 30" fill="none" stroke="{ACCENT}" stroke-width="1.2" stroke-linecap="round"/>'
+        f'<path class="fade" d="M 816 17 L 821 20 L 816 23" fill="none" stroke="{ACCENT}" stroke-width="1.2" stroke-linecap="round"/>'
     )
 
     add("</svg>")
